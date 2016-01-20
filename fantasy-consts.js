@@ -2,5 +2,4 @@
 
 const Const = require('./src/const');
 
-if (typeof module != 'undefined')
-    module.exports = Const;
+module.exports = Const;
