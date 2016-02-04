@@ -1,21 +1,28 @@
 'use strict';
 
 const {tagged} = require('daggy');
-const Const = tagged('x');
-const {of, ap, concat, map} = require('fantasy-land');
+const {empty, of, ap, concat, map} = require('fantasy-land');
 
-Const[of] = (x) => Const(x.empty());
+const Const = M => {
 
-Const.prototype[ap] = function(fa) {
-    return this[concat](fa);
-};
+    const Const = tagged('x');
+    
+    Const[empty] = () => Const(M[empty]());
+    Const[of] = Const[empty];
 
-Const.prototype[concat] = function(y) {
-    return Const(this.x[concat](y.x));
-};
+    Const.prototype[ap] = function(fa) {
+        return this[concat](fa);
+    };
 
-Const.prototype[map] = function(f) {
-    return Const(this.x);
+    Const.prototype[concat] = function(y) {
+        return Const(this.x[concat](y.x));
+    };
+
+    Const.prototype[map] = function(f) {
+        return Const(this.x);
+    };
+
+    return Const;
 };
 
 module.exports = Const;

@@ -16,7 +16,7 @@ Sum.prototype.concat = function(a) {
 const Const = require('../fantasy-consts');
 
 function of(x) {
-    return Const.of(Sum(x));
+    return Const(Sum).of(Sum(x));
 }
 
 function run(x) {
